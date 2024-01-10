@@ -6,7 +6,7 @@ For Bluetooth Low Energy, this processor handles Bluetooth Low Energy 1M Uncoded
 
 ## Documentation
 
-Full technical documentation for this project can be found at the associated [Github Pages](https://chipyard.readthedocs.io/en/latest/).
+Full technical documentation for this project can be found at the associated [Github Pages](https://ucb-bar.github.io/baseband-modem/).
 
 The full technical documentation includes the register map enumeration, interrupt enumeration, configuration guides for the LUTs, explanation of theory of operation, debug & loopback operation, and more.
 
@@ -19,7 +19,16 @@ The full technical documentation includes the register map enumeration, interrup
 
 ## Usage
 
-This project is designed to be used as a peripheral on an SoC generated with Chipyard. Assuming you have started with a fork of the Chipyard repository, you can add this project as a dependency by adding the following lines to the Chipyard root `build.sbt` file:
+This project is designed to be used as a peripheral on an SoC generated with Chipyard, and this usage guide assumed you have started with a fork of the Chipyard repository.
+
+If this guide makes little sense, it's best to begin with the Chipyard documentation. Specifically these two guides are a good start:
+
+- [Chipyard Documentation - MMIO Peripherals](https://chipyard.readthedocs.io/en/stable/Customization/MMIO-Peripherals.html)
+- [Chipyard Documentation - IOBinders and HarnessBindres](https://chipyard.readthedocs.io/en/stable/Customization/IOBinders.html)
+
+### Chipyard root build.sbt
+
+Add this project as a dependency by adding the following lines to the Chipyard root `build.sbt` file:
 
 Ensure that the `chipyard` project depends on the `baseband` project as well as the `dma` project (which is a dependency of the `baseband` project).
 
@@ -43,6 +52,7 @@ lazy val baseband = (project in file("generators/baseband"))
   .settings(commonSettings)
 ```
 
+### Chipyard ChipConfigs.scala
 In your `generators/chipyard/src/main/scala/config/ChipConfigs.scala` file, you should have your own extension
 of the Config that parametrizes your SoC. 
 
@@ -56,6 +66,7 @@ new chipyard.harness.WithBasebandModemTiedOff ++
 // END: Baseband-modem peripheral settings
 ```
 
+### Chipyard HarnessBinders.scala
 In your `generators/chipyard/src/main/scala/HarnessBinders.scala` file, an example configuration of the harness binder is given below. This is for a 32 MHz ADC clock.
 
 ```scala
@@ -78,6 +89,8 @@ class WithBasebandModemTiedOff extends OverrideHarnessBinder({
   }
 })
 ```
+
+### Chipyard IOBinders.scala
 
 In your `generators/chipyard/src/main/scala/IOBinders.scala` file, an example configuration of the IO binder is given below. Nothing in this case is specific to the DSP/ADC frequency, but it does leverage the use of the `offchipmode_rx/tx` IO signals associated with half-duplex switches in the RFE.
 

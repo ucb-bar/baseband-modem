@@ -1,20 +1,43 @@
-== Digital Baseband-Modem
+= Digital Baseband-Modem
+:toc:
+:toclevels: 3
+:imagesdir: ./images
+:outline-title: Table of Contents
+:outlinelevels: 3
+:organization: UC Berkeley EECS
+:date: {localdate}
+:revnumber: v1.0
+:doctype: book
+ifdef::env-vscode[]
+:pdf-themesdir: ./docs/themes
+:pdf-theme: specsheet
+endif::[]
+ifndef::env-vscode[]
+:pdf-themesdir: ./themes
+:pdf-theme: specsheet
+endif::[]
+:sectnums:
+:sectlinks:
+:!chapter-signifier:
 
-=== Dual-Mode Baseband-Modem
+
+== Dual-Mode Baseband-Modem
 
 The Dual-Mode Baseband-Modem (BM) is responsible for handling the transmission and reception of both Bluetooth LE and IEEE 802.15.4 packets. For Bluetooth Low Energy, the BM handles Bluetooth Low Energy 1M Uncoded Link Layer Packets. For IEEE 802.15.4, the BM handles packets transmitted according to the PHY standard for the O-QPSK modulation in the 2.4 GHz band. Additionally the BM exposes an interface for the CPU to read/write various information (e.g. tuning bits) to the analog RF. 
 
 There are two primary sub-components in the Baseband-Modem, the Baseband, and the Modem. The baseband is responsible for the bit-stream processing of incoming and outgoing packets. The modem is responsible for modulation on the TX side, and digital image rejection and demodulation on the RX side.
 
-==== Architecture Overview
+=== Architecture Overview
 
+.Receive chain system block diagram.
 image::rx_chain_diagram.png[] 
 
+.Transmit chain system block diagram.
 image::tx_chain_diagram.png[]
 
-==== Baseband-Modem Frontend
+=== Baseband-Modem Frontend
 
-===== Commands and MMIO Registers
+=== Commands and MMIO Registers
 
 The baseband-modem (BM) block contains a set of memory mapped registers used for passing commands to the BM, tuning analog RF components, and making BM status visible to the CPU. The address map is shown below. Note that the addresses are relative to the BM’s base attachment address. For example, if the BM is attached at 0x8000, then the address of 0x04 corresponds to 0x8004.
 
@@ -106,7 +129,7 @@ In order to pass commands to the BM, two 32-bit registers at addresses 0x00 and 
 | Field     | Data | Instruction 2 | Instruction 1
 |===
 
-===== List of Commands
+=== List of Commands
 
 **Configure Command**
 
@@ -236,9 +259,9 @@ Turns on both the TX and RX paths according to the specified loopback mask befor
 |===
 
 .Loopback diagram, note that the FSKRX module handles loopback logic and directs the output of MSKTX & GFSK TX modules to respective CDR blocks
-image:loopback_diagram.png[] 
+image::loopback_diagram.png[] 
 
-===== Configuring Modem LUTs
+=== Configuring Modem LUTs
 
 The modem LUTs can be configured using the LUT command register in the MMIO map enumerated above (register offset 0x50).
 
@@ -265,7 +288,7 @@ LUT IDs are defined as follows:
 0x6 - DCO_Q::
 64-entry LUT that is sampled to drive the current DAC for the Q channel stage 2 VGA. Only the lower 32 entries are used.
 
-===== Configuring the FIR filter coefficients
+=== Configuring the FIR filter coefficients
 
 The FIR filter coefficients can be configured using the FIR command register in the MMIO map enumerated above (register offset 0x60).
 
@@ -298,12 +321,12 @@ Reserved
 0x8 - RX_LPF::
 32-entry, 16-bit FixedPoint (12-bit fractional component) filter for bitrate filter of the matched filter output. Two filters with the same coefficients are used, one for 0s and another for 1s. Note BLE coefficients are loaded by default. LR-WPAN ones must be loaded separately.
 
-==== Interrupts
+=== Interrupts
 
 The Baseband-Modem provides five interrupts as outputs from the Baseband Frontend. These interrupts provide the CPU with triggers for events from the transceiver module. The interrupts are described in the table below:
 
 .Baseband-Modem interrupt table
-[cols="1,1,3",options="header"]
+[cols="1,1,4",options="header"]
 |===
 | Interrupt Index | Name | Description 
 | 0 | RX_ERROR | Triggers on recognition of an error while the BM is in RX state. The MMIO register 0x54 will be populated with an RX_ERROR_MESSAGE. Presently not implemented. 
@@ -315,7 +338,8 @@ The Baseband-Modem provides five interrupts as outputs from the Baseband Fronten
 
 === IEEE 802.15.4 LR-WPAN Baseband
 
-.Baseband modulation/demodulation diagram
+.LR-WPAN baseband and modulation/demodulation diagram
+image::lrwpan_baseband.png[] 
 
 The LR-WPAN baseband transmission chain involves DMA packet disassembly, LR-WPAN packet assembly, CRC generation, bit-to-symbol translation, and symbol-to-chip translation before the final chip stream is provided to the modem for modulation. The packet is assembled according to the IEEE 802.15.4 (LR-WPAN) PPDU schematic (shown below). 
 
@@ -324,10 +348,12 @@ It is important to note the rates at each stage of the baseband TX chain. The st
 During packet assembly, a frame check sequence is calculated as a 16-bit ITU-T CRC.
 
 .CRC calculation diagram
+image::lrwpan_crc_diagram.png[] 
 
 The algorithm for the CRC begins by setting all remainder registers, r0...r15, to zero. Next, we start from the LSB and shift the MHR and payload into the divider. The FCS is then the remainder register after the last bit of the data is shifted in. Lastly, the FCS is appended to the data field so that register r0 is transmitted first.
 
 .IEEE 802.15.4 PPDU Schematic
+image::lrwpan_ppdu_schematic.png[] 
 
 The frame check sequence (FCS) is appended to the end of the PPDU as the MAC footer (MFR) in the diagram above. If the result of CRC checking is false, the [flag] is set to high, before triggering a RX_ERROR message.
 
@@ -336,3 +362,26 @@ The frame check sequence (FCS) is appended to the end of the PPDU as the MAC foo
 The preamble for 15.4 is a 32-bit sequence of all zeros. The SFD is loosely analogous to the Access-Address (AA) of the BLE Baseband in that they both uniquely identify the start of the packet for the protocol used.
 
 === Bluetooth Low Energy (BLE) Baseband
+
+.BLE baseband and modulation/demodulation diagram
+
+Below is the BLE Uncoded Packet format. All elements of the packet either are or depend on data that the CPU must set (which is taken care of by the SW implementation of the Link Layer). These values are communicated to the packet assembler and disassembler through the controller via the command system over MMIO.
+
+.BLE PPDU Schematic
+
+The Preamble is an alternating series of 1s and 0s that depends on the LSB of the Access-Address (AA). The CPU need not provide any additional control signals for this part of the packet.
+
+The Access-Address is a special value set by the SW Link Layer that determines whether a packet is valid or not. This value must be provided by the CPU and depends on past communications or may be set to some default value.
+
+The PDU is the already encrypted content of the packet, the CPU must provide this in its entirety. Through the DMA controller, the packet assembler will retrieve this from main memory. The packet disassembler will deliver a PDU to the main memory once one is received.
+The CRC (cyclic redundancy check) is derived from the Link Layer state (which must be provided by the CPU via MMIO register. 
+In the receive chain, if the calculated CRC does not match the CRC found in the PDU, the [flag] is set to high.
+
+==== Whitening 
+
+In order to avoid long continuous sequences of 1s and 0s in the transmitted data, the entire packet goes through a process known as whitening.
+
+.Whitening diagram
+image::whitening_diagram.png[] 
+
+Outgoing data on the TX chain is whitened and incoming data is also “de-whitened”

@@ -6,9 +6,16 @@ For Bluetooth Low Energy, this processor handles Bluetooth Low Energy 1M Uncoded
 
 ## Documentation
 
-Full technical documentation for this project can be found at the associated [Github Pages](https://ucb-bar.github.io/baseband-modem/).
+[Full technical documentation](https://ucb-bar.github.io/baseband-modem/) for this project is hosted on GitHub Pages and built from AsciiDoc source in the `doc/` directory.
 
-The full technical documentation includes the register map enumeration, interrupt enumeration, configuration guides for the LUTs, explanation of theory of operation, debug & loopback operation, and more.
+The full technical documentation includes:
+ - Register map enumeration
+ - Interrupt enumeration
+ - Baseband processor miniature ISA specification
+ - Configuration guides for the LUTs
+ - Debug & loopback operation guide
+ - Explanation of theory of operation
+ - Example on-chip radio front-end specification & architecture
 
 ## Repository Structure
 

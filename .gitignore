@@ -1,0 +1,12 @@
+.idea
+target
+.DS_Store
+.ipynb_checkpoints
+software/models/slprj/
+*.asv
+*.slxc
+*.autosave
+.vscode/
+.metals/
+.bloop/
+metals.sbt

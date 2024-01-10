@@ -1,0 +1,48 @@
+extends: default
+page:
+  size: A4
+  layout: portrait
+  margin:
+    left: 1in
+    right: 1in
+    top: 0.75in
+    bottom: 0.75in
+# Change the body font size 
+base:
+  font_size: 10
+  font-family: Helvetica
+header:
+  height: 0.5in
+  line_height: 0.8
+  font_color: '0000AA' # Blue
+  border_color: 'CC9900' # Gold
+  border_width: 2
+  recto:
+    right:
+      content: '{section-or-chapter-title}'
+    left: 
+      content: '{document-title}'
+  verso:
+    right:
+      content: '{section-or-chapter-title} | {page-number} of {page-count}'
+    left: 
+      content: '{document-title}'
+footer:
+  height: 0.5in
+  line_height: 1.2
+  font_color: '0000AA' # Blue
+  border_color: 'CC9900' # Gold
+  border_width: 2
+  recto:
+    right:
+      content: '{section-or-chapter-title} | {page-number} of {page-count}'
+  verso:
+    right:
+      content: '{section-or-chapter-title} | {page-number} of {page-count}'
+title:
+  font_color: '0000AA' # Blue
+  border_color: 'CC9900' # Gold
+heading:
+  font_color: '0000AA' # Blue
+table:
+  font_size: 8

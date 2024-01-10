@@ -364,18 +364,25 @@ The preamble for 15.4 is a 32-bit sequence of all zeros. The SFD is loosely anal
 === Bluetooth Low Energy (BLE) Baseband
 
 .BLE baseband and modulation/demodulation diagram
+image::ble_baseband.png[] 
 
 Below is the BLE Uncoded Packet format. All elements of the packet either are or depend on data that the CPU must set (which is taken care of by the SW implementation of the Link Layer). These values are communicated to the packet assembler and disassembler through the controller via the command system over MMIO.
 
 .BLE PPDU Schematic
+image::ble_ppdu_schematic.png[] 
+
 
 The Preamble is an alternating series of 1s and 0s that depends on the LSB of the Access-Address (AA). The CPU need not provide any additional control signals for this part of the packet.
 
 The Access-Address is a special value set by the SW Link Layer that determines whether a packet is valid or not. This value must be provided by the CPU and depends on past communications or may be set to some default value.
 
 The PDU is the already encrypted content of the packet, the CPU must provide this in its entirety. Through the DMA controller, the packet assembler will retrieve this from main memory. The packet disassembler will deliver a PDU to the main memory once one is received.
-The CRC (cyclic redundancy check) is derived from the Link Layer state (which must be provided by the CPU via MMIO register. 
+
+The CRC (cyclic redundancy check) is derived from the Link Layer state (which must be provided by the CPU via MMIO register). 
 In the receive chain, if the calculated CRC does not match the CRC found in the PDU, the [flag] is set to high.
+
+.BLE CRC functional schematic
+image::ble_crc_diagram.png[] 
 
 ==== Whitening 
 
@@ -385,3 +392,105 @@ In order to avoid long continuous sequences of 1s and 0s in the transmitted data
 image::whitening_diagram.png[] 
 
 Outgoing data on the TX chain is whitened and incoming data is also “de-whitened”
+
+=== Unified FSK Modem
+
+The modem sits between the digital baseband and the ADCs / DAC to analog RF. It is responsible for performing demodulation and modulation and clock and data recovery at a rate of 1Mbps for BLE or 2Mchip/s for LR-WPAN. Each cycle, the digital baseband either receives a new bit from the demodulator, or provides a new bit for transmission to the modulator.
+
+==== TX Chain
+
+.Modem TX chain schematic
+image::modem_tx_schematic.png[] 
+
+The digital baseband bit-stream process outputs individual bits into a FIFO that will be consumed by the modem for use in modulation. For BLE transmissions, the bitstream is modulated using Gaussian frequency shift keying (GFSK). The modulator modulates the outgoing bits using at a rate of 1Msym/s, with a modulation index of 0.5. For LR-WPAN transmissions, the chipstream directly drives the modulation LUT. The output of the modulation LUT is an 8-bit unsigned integer value that indicates the FSK modulation away from the maximum frequency at that channel tuning.
+
+The 6-bit FSK modulation output, in conjunction with a 6 bit channel select value, are used to address into the Modulation LUT to retrieve input values for the VCO LO based on the channel index and modulation frequency offset. These decoding LUTs provide 8-bit values for LO coarse tuning, LO FSK, and the PLL division.
+
+==== RX Chain
+
+.Modem RX chain schematic
+image::modem_rx_schematic.png[] 
+
+After mixing, the analog I and Q signals go through ADCs to produce 8 bit output values. The ADCs are clocked on the negative edge of the digital system clock. On the falling system clock edge, the ADCs sample and latch the signals coming from analog RF. These sampled 8-bit values are then captured by rising-edge triggered flip-flops at the analog-digital boundary of the RX chain.
+
+===== Image Rejection
+
+After mixing with the LO and being sampled by the I/Q ADCs, the Q signal for the signal (F_LO+F_IF) ends up +90° shifted from I while the image (F_LO-F_IF) ends up -90° shifted from I. A Hilbert filter shifts positive frequencies by +90° and negative frequencies by -90°. By applying it to the I signal and adding to the Q signal, this causes constructive interference for the desired signal and destructive interference for the image, heavily attenuating it. Note these filters are fully configurable (up to their maximum length) if needed.
+
+===== FSK Demodulation
+
+After image rejection, the matched filters (the optimal non-coherent demodulator!) and envelope detection serve to discriminate between positive and negative frequency deviations. A matched filter performs a convolution of the input signal with a “template” which is simply samples of the desired frequency up to the length of a bit/chip period. Due to phase shift, we must have sine and cosine templates and sum the two. Since the filters generate high frequency noise, we perform “envelope detection” after the matched filters to remove it and get a clean signal giving the magnitude of the match. Comparing the magnitude of each gives us the decision for the deviation.
+
+For an ADC clock of 32MHz, we need a 32-length filter for BLE and 16-length filter for LR-WPAN. For an IF of 2MHz, we need templates of 1.75MHz and 2.25MHz for BLE and 1.5MHz and 2.5MHz for LR-WPAN.
+
+
+===== Clock and Data Recovery (CDR)
+
+After FSK demodulation, we have an oversampled bitstream which must downsample to the appropriate bitrate. The goal of the CDR is to align the sampling window with the phase of the incoming bitstream.
+
+Our design has 3 integrators - early, present, late - which each look at a window (of length equal to the bit period) of the incoming bitstream but are offset from each other by 1 cycle. We then have a counter that decrements every cycle. When the counter hits 0, we return a sampled bit that is the value of the strongest integrator (determined by majority and number of 1s and 0s). We then reset the counter to a value that will cause the winning integrator in the next bit period to be closer to the present integrator (either by extending or shortening the amount of time to the next sample time).
+
+For LR-WPAN, the long length of the preamble and chip spreading make slow phase aligning CDRs a non-issue. For BLE, we only have the preamble of 8 symbols to align. For a 32MHz clock and BLE’s 1Mbps, we would be at most 16 cycles off in phase alignment. However, since our CDR always returns the integrator of greatest absolute value rather than the present one each time, it should confidently return the correct symbol despite a large phase shift and it still aligning to an incoming signal.
+
+This idea can easily be extended to more integrators to align to phase shifts more quickly or control the granularity of phase shifts, but we found that 3 integrators and a 1 cycle shift between them worked well in simulation. If our clock is particularly off, the CDR will fail to account for both the phase shift and clock inaccuracy which would necessitate the extension.
+
+===== Packet Detection
+
+For BLE, the preamble is intended to lock in the AGC and CDR while the following access address is what determines the start of the packet and the byte alignment. The BLE packet detector searches for the access address after which it can confidently send (whitened) bytes over to the baseband. The baseband asserts an end-of-packet signal when it’s done consuming the bytes of the packet.
+
+For LR-WPAN, the preamble again locks in the AGC and CDR while the SFD (0xA7) denotes the start of the packet. Since each 4-bit symbol (within each 8-bit byte) is sent out as a 32-chip sequence, we perform the chip sequence to symbol mapping based on Hamming distance before looking for the SFD. To minimize false matches while reducing hardware cost, we also match one byte of the preamble (searching for 0xA700) to determine the start of the packet. After that, the packet detector can again confidently send bytes to the baseband.
+
+
+===== Automatic Gain Control (AGC)
+
+To support high dynamic range and also keep our ADCs near saturation to maximize demodulation accuracy and SNR, we have an AGC for I and Q. It is a simple design, keeping track of the difference between the minimum and maximum values of the ADC for a given window (which should be long enough to see a sine wave minimum and maximum). If the value exceeds the desired value plus some tolerance, we increase the gain. If it’s below, we decrease the gain.
+
+For stable output, keep the tolerance larger than the gain resolution. For fast locking to incoming signals (where the AGC will be at its maximum due to just seeing noise), have the decrement amount be larger than the increment amount.
+
+===== DC Offset Compensation (DCO)
+
+To remove the DC offset in the ADC output for I and Q, we have a DCO. It simply integrates the incoming signal (interpreted as a FixedPoint between -1 and ~1), applies a gain, and feeds that back into a LUT that will calibrate the VGA to remove the offset.
+
+
+== Example Radio Front-End (RFE)
+
+=== Specification
+
+The radio must be able to operate in the frequency range of 2.4G to 2.4835 GHz covering 70 1MHz RF channels. In this range, the receive chain should function over an input power range from -70dBm to -10dBm and achieve a BER of 0.1% (translates to an SNR of 12.5dB) in following in band test conditions when the input is at -67dBm, shown below.
+
+
+.In-Band Interference, Nominal Temperature
+[options="header", cols="4*"]
+|===
+| Interference Channel | Ratio (dB) | Input Signal (dBm) | Interferer (dBm)
+
+| Co-channel | 11 | -60 dBm | -71 dBm
+| Adj. 1 MHz | 0 | -60 dBm | -60 dBm
+| Adj. 2 MHz | -30 | -60 dBm | -30 dBm
+| Adj. >3 MHz | -40 | -67 dBm | -27 dBm
+| Image | -9 | -67 dBm | -58 dBm
+| Image +/- 1 MHz | -20 | -67 dBm | -47 dBm
+|===
+
+.Out-of-Band Interference
+[options="header", cols="2*"]
+|===
+| Interference Channel | Interferer (dBm)
+
+| 30 MHz - 2000 MHz | -10 dBm
+| 2000 MHz - 2399 MHz | -27 dBm
+| 2484 MHz - 3000 MHz | -27 dBm
+| 3000 MHz - 12.75 GHz | -10 dBm
+|===
+
+=== Example On-Chip RFE Architecture
+
+The example radio front-end architecture below uses a low-IF receiver architecture and a direct modulation transmitter architecture. This architecture is the on-chip RFE that was used during the development of this baseband-modem processor, so most of the analog tuning and configuration registers are specific to this architecture.
+
+.Example on-chip RFE architecture
+image::example_rfe_diagram.png[] 
+
+The baseband-modem's receive chain supports automatic gain control based on tuning the the VGA and VG-TIA gain stages. And its DC offset correction (DCOC) is based on tuning the current DAC at the input of the final VGA stage.
+
+The baseband-modem's transmit modulation implementation is specific to this direct modulation architecture, where the coarse/med/mod bits drive the capacitively tuned VCO. 
+

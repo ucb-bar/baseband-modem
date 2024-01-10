@@ -1,0 +1,1716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.20">
+<title>Digital Baseband-Modem</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
+<style>
+/*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
+/* Uncomment the following line when using as a custom stylesheet */
+/* @import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700"; */
+html{font-family:sans-serif;-webkit-text-size-adjust:100%}
+a{background:none}
+a:focus{outline:thin dotted}
+a:active,a:hover{outline:0}
+h1{font-size:2em;margin:.67em 0}
+b,strong{font-weight:bold}
+abbr{font-size:.9em}
+abbr[title]{cursor:help;border-bottom:1px dotted #dddddf;text-decoration:none}
+dfn{font-style:italic}
+hr{height:0}
+mark{background:#ff0;color:#000}
+code,kbd,pre,samp{font-family:monospace;font-size:1em}
+pre{white-space:pre-wrap}
+q{quotes:"\201C" "\201D" "\2018" "\2019"}
+small{font-size:80%}
+sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}
+sup{top:-.5em}
+sub{bottom:-.25em}
+img{border:0}
+svg:not(:root){overflow:hidden}
+figure{margin:0}
+audio,video{display:inline-block}
+audio:not([controls]){display:none;height:0}
+fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}
+legend{border:0;padding:0}
+button,input,select,textarea{font-family:inherit;font-size:100%;margin:0}
+button,input{line-height:normal}
+button,select{text-transform:none}
+button,html input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}
+button[disabled],html input[disabled]{cursor:default}
+input[type=checkbox],input[type=radio]{padding:0}
+button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}
+textarea{overflow:auto;vertical-align:top}
+table{border-collapse:collapse;border-spacing:0}
+*,::before,::after{box-sizing:border-box}
+html,body{font-size:100%}
+body{background:#fff;color:rgba(0,0,0,.8);padding:0;margin:0;font-family:"Noto Serif","DejaVu Serif",serif;line-height:1;position:relative;cursor:auto;-moz-tab-size:4;-o-tab-size:4;tab-size:4;word-wrap:anywhere;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased}
+a:hover{cursor:pointer}
+img,object,embed{max-width:100%;height:auto}
+object,embed{height:100%}
+img{-ms-interpolation-mode:bicubic}
+.left{float:left!important}
+.right{float:right!important}
+.text-left{text-align:left!important}
+.text-right{text-align:right!important}
+.text-center{text-align:center!important}
+.text-justify{text-align:justify!important}
+.hide{display:none}
+img,object,svg{display:inline-block;vertical-align:middle}
+textarea{height:auto;min-height:50px}
+select{width:100%}
+.subheader,.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{line-height:1.45;color:#7a2518;font-weight:400;margin-top:0;margin-bottom:.25em}
+div,dl,dt,dd,ul,ol,li,h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6,pre,form,p,blockquote,th,td{margin:0;padding:0}
+a{color:#2156a5;text-decoration:underline;line-height:inherit}
+a:hover,a:focus{color:#1d4b8f}
+a img{border:0}
+p{line-height:1.6;margin-bottom:1.25em;text-rendering:optimizeLegibility}
+p aside{font-size:.875em;line-height:1.35;font-style:italic}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{font-family:"Open Sans","DejaVu Sans",sans-serif;font-weight:300;font-style:normal;color:#ba3925;text-rendering:optimizeLegibility;margin-top:1em;margin-bottom:.5em;line-height:1.0125em}
+h1 small,h2 small,h3 small,#toctitle small,.sidebarblock>.content>.title small,h4 small,h5 small,h6 small{font-size:60%;color:#e99b8f;line-height:0}
+h1{font-size:2.125em}
+h2{font-size:1.6875em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.375em}
+h4,h5{font-size:1.125em}
+h6{font-size:1em}
+hr{border:solid #dddddf;border-width:1px 0 0;clear:both;margin:1.25em 0 1.1875em}
+em,i{font-style:italic;line-height:inherit}
+strong,b{font-weight:bold;line-height:inherit}
+small{font-size:60%;line-height:inherit}
+code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;color:rgba(0,0,0,.9)}
+ul,ol,dl{line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
+ul,ol{margin-left:1.5em}
+ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0}
+ul.circle{list-style-type:circle}
+ul.disc{list-style-type:disc}
+ul.square{list-style-type:square}
+ul.circle ul:not([class]),ul.disc ul:not([class]),ul.square ul:not([class]){list-style:inherit}
+ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
+dl dt{margin-bottom:.3125em;font-weight:bold}
+dl dd{margin-bottom:1.25em}
+blockquote{margin:0 0 1.25em;padding:.5625em 1.25em 0 1.1875em;border-left:1px solid #ddd}
+blockquote,blockquote p{line-height:1.6;color:rgba(0,0,0,.85)}
+@media screen and (min-width:768px){h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2}
+h1{font-size:2.75em}
+h2{font-size:2.3125em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.6875em}
+h4{font-size:1.4375em}}
+table{background:#fff;margin-bottom:1.25em;border:1px solid #dedede;word-wrap:normal}
+table thead,table tfoot{background:#f7f8f7}
+table thead tr th,table thead tr td,table tfoot tr th,table tfoot tr td{padding:.5em .625em .625em;font-size:inherit;color:rgba(0,0,0,.8);text-align:left}
+table tr th,table tr td{padding:.5625em .625em;font-size:inherit;color:rgba(0,0,0,.8)}
+table tr.even,table tr.alt{background:#f8f8f7}
+table thead tr th,table tfoot tr th,table tbody tr td,table tr td,table tfoot tr td{line-height:1.6}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2;word-spacing:-.05em}
+h1 strong,h2 strong,h3 strong,#toctitle strong,.sidebarblock>.content>.title strong,h4 strong,h5 strong,h6 strong{font-weight:400}
+.center{margin-left:auto;margin-right:auto}
+.stretch{width:100%}
+.clearfix::before,.clearfix::after,.float-group::before,.float-group::after{content:" ";display:table}
+.clearfix::after,.float-group::after{clear:both}
+:not(pre).nobreak{word-wrap:normal}
+:not(pre).nowrap{white-space:nowrap}
+:not(pre).pre-wrap{white-space:pre-wrap}
+:not(pre):not([class^=L])>code{font-size:.9375em;font-style:normal!important;letter-spacing:0;padding:.1em .5ex;word-spacing:-.15em;background:#f7f7f8;border-radius:4px;line-height:1.45;text-rendering:optimizeSpeed}
+pre{color:rgba(0,0,0,.9);font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;line-height:1.45;text-rendering:optimizeSpeed}
+pre code,pre pre{color:inherit;font-size:inherit;line-height:inherit}
+pre>code{display:block}
+pre.nowrap,pre.nowrap pre{white-space:pre;word-wrap:normal}
+em em{font-style:normal}
+strong strong{font-weight:400}
+.keyseq{color:rgba(51,51,51,.8)}
+kbd{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;display:inline-block;color:rgba(0,0,0,.8);font-size:.65em;line-height:1.45;background:#f7f7f7;border:1px solid #ccc;border-radius:3px;box-shadow:0 1px 0 rgba(0,0,0,.2),inset 0 0 0 .1em #fff;margin:0 .15em;padding:.2em .5em;vertical-align:middle;position:relative;top:-.1em;white-space:nowrap}
+.keyseq kbd:first-child{margin-left:0}
+.keyseq kbd:last-child{margin-right:0}
+.menuseq,.menuref{color:#000}
+.menuseq b:not(.caret),.menuref{font-weight:inherit}
+.menuseq{word-spacing:-.02em}
+.menuseq b.caret{font-size:1.25em;line-height:.8}
+.menuseq i.caret{font-weight:bold;text-align:center;width:.45em}
+b.button::before,b.button::after{position:relative;top:-1px;font-weight:400}
+b.button::before{content:"[";padding:0 3px 0 2px}
+b.button::after{content:"]";padding:0 2px 0 3px}
+p a>code:hover{color:rgba(0,0,0,.9)}
+#header,#content,#footnotes,#footer{width:100%;margin:0 auto;max-width:62.5em;*zoom:1;position:relative;padding-left:.9375em;padding-right:.9375em}
+#header::before,#header::after,#content::before,#content::after,#footnotes::before,#footnotes::after,#footer::before,#footer::after{content:" ";display:table}
+#header::after,#content::after,#footnotes::after,#footer::after{clear:both}
+#content{margin-top:1.25em}
+#content::before{content:none}
+#header>h1:first-child{color:rgba(0,0,0,.85);margin-top:2.25rem;margin-bottom:0}
+#header>h1:first-child+#toc{margin-top:8px;border-top:1px solid #dddddf}
+#header>h1:only-child,body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #dddddf;padding-bottom:8px}
+#header .details{border-bottom:1px solid #dddddf;line-height:1.45;padding-top:.25em;padding-bottom:.25em;padding-left:.25em;color:rgba(0,0,0,.6);display:flex;flex-flow:row wrap}
+#header .details span:first-child{margin-left:-.125em}
+#header .details span.email a{color:rgba(0,0,0,.85)}
+#header .details br{display:none}
+#header .details br+span::before{content:"\00a0\2013\00a0"}
+#header .details br+span.author::before{content:"\00a0\22c5\00a0";color:rgba(0,0,0,.85)}
+#header .details br+span#revremark::before{content:"\00a0|\00a0"}
+#header #revnumber{text-transform:capitalize}
+#header #revnumber::after{content:"\00a0"}
+#content>h1:first-child:not([class]){color:rgba(0,0,0,.85);border-bottom:1px solid #dddddf;padding-bottom:8px;margin-top:0;padding-top:1rem;margin-bottom:1.25rem}
+#toc{border-bottom:1px solid #e7e7e9;padding-bottom:.5em}
+#toc>ul{margin-left:.125em}
+#toc ul.sectlevel0>li>a{font-style:italic}
+#toc ul.sectlevel0 ul.sectlevel1{margin:.5em 0}
+#toc ul{font-family:"Open Sans","DejaVu Sans",sans-serif;list-style-type:none}
+#toc li{line-height:1.3334;margin-top:.3334em}
+#toc a{text-decoration:none}
+#toc a:active{text-decoration:underline}
+#toctitle{color:#7a2518;font-size:1.2em}
+@media screen and (min-width:768px){#toctitle{font-size:1.375em}
+body.toc2{padding-left:15em;padding-right:0}
+#toc.toc2{margin-top:0!important;background:#f8f8f7;position:fixed;width:15em;left:0;top:0;border-right:1px solid #e7e7e9;border-top-width:0!important;border-bottom-width:0!important;z-index:1000;padding:1.25em 1em;height:100%;overflow:auto}
+#toc.toc2 #toctitle{margin-top:0;margin-bottom:.8rem;font-size:1.2em}
+#toc.toc2>ul{font-size:.9em;margin-bottom:0}
+#toc.toc2 ul ul{margin-left:0;padding-left:1em}
+#toc.toc2 ul.sectlevel0 ul.sectlevel1{padding-left:0;margin-top:.5em;margin-bottom:.5em}
+body.toc2.toc-right{padding-left:0;padding-right:15em}
+body.toc2.toc-right #toc.toc2{border-right-width:0;border-left:1px solid #e7e7e9;left:auto;right:0}}
+@media screen and (min-width:1280px){body.toc2{padding-left:20em;padding-right:0}
+#toc.toc2{width:20em}
+#toc.toc2 #toctitle{font-size:1.375em}
+#toc.toc2>ul{font-size:.95em}
+#toc.toc2 ul ul{padding-left:1.25em}
+body.toc2.toc-right{padding-left:0;padding-right:20em}}
+#content #toc{border:1px solid #e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;border-radius:4px}
+#content #toc>:first-child{margin-top:0}
+#content #toc>:last-child{margin-bottom:0}
+#footer{max-width:none;background:rgba(0,0,0,.8);padding:1.25em}
+#footer-text{color:hsla(0,0%,100%,.8);line-height:1.44}
+#content{margin-bottom:.625em}
+.sect1{padding-bottom:.625em}
+@media screen and (min-width:768px){#content{margin-bottom:1.25em}
+.sect1{padding-bottom:1.25em}}
+.sect1:last-child{padding-bottom:0}
+.sect1+.sect1{border-top:1px solid #e7e7e9}
+#content h1>a.anchor,h2>a.anchor,h3>a.anchor,#toctitle>a.anchor,.sidebarblock>.content>.title>a.anchor,h4>a.anchor,h5>a.anchor,h6>a.anchor{position:absolute;z-index:1001;width:1.5ex;margin-left:-1.5ex;display:block;text-decoration:none!important;visibility:hidden;text-align:center;font-weight:400}
+#content h1>a.anchor::before,h2>a.anchor::before,h3>a.anchor::before,#toctitle>a.anchor::before,.sidebarblock>.content>.title>a.anchor::before,h4>a.anchor::before,h5>a.anchor::before,h6>a.anchor::before{content:"\00A7";font-size:.85em;display:block;padding-top:.1em}
+#content h1:hover>a.anchor,#content h1>a.anchor:hover,h2:hover>a.anchor,h2>a.anchor:hover,h3:hover>a.anchor,#toctitle:hover>a.anchor,.sidebarblock>.content>.title:hover>a.anchor,h3>a.anchor:hover,#toctitle>a.anchor:hover,.sidebarblock>.content>.title>a.anchor:hover,h4:hover>a.anchor,h4>a.anchor:hover,h5:hover>a.anchor,h5>a.anchor:hover,h6:hover>a.anchor,h6>a.anchor:hover{visibility:visible}
+#content h1>a.link,h2>a.link,h3>a.link,#toctitle>a.link,.sidebarblock>.content>.title>a.link,h4>a.link,h5>a.link,h6>a.link{color:#ba3925;text-decoration:none}
+#content h1>a.link:hover,h2>a.link:hover,h3>a.link:hover,#toctitle>a.link:hover,.sidebarblock>.content>.title>a.link:hover,h4>a.link:hover,h5>a.link:hover,h6>a.link:hover{color:#a53221}
+details,.audioblock,.imageblock,.literalblock,.listingblock,.stemblock,.videoblock{margin-bottom:1.25em}
+details{margin-left:1.25rem}
+details>summary{cursor:pointer;display:block;position:relative;line-height:1.6;margin-bottom:.625rem;outline:none;-webkit-tap-highlight-color:transparent}
+details>summary::-webkit-details-marker{display:none}
+details>summary::before{content:"";border:solid transparent;border-left:solid;border-width:.3em 0 .3em .5em;position:absolute;top:.5em;left:-1.25rem;transform:translateX(15%)}
+details[open]>summary::before{border:solid transparent;border-top:solid;border-width:.5em .3em 0;transform:translateY(15%)}
+details>summary::after{content:"";width:1.25rem;height:1em;position:absolute;top:.3em;left:-1.25rem}
+.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{text-rendering:optimizeLegibility;text-align:left;font-family:"Noto Serif","DejaVu Serif",serif;font-size:1rem;font-style:italic}
+table.tableblock.fit-content>caption.title{white-space:nowrap;width:0}
+.paragraph.lead>p,#preamble>.sectionbody>[class=paragraph]:first-of-type p{font-size:1.21875em;line-height:1.6;color:rgba(0,0,0,.85)}
+.admonitionblock>table{border-collapse:separate;border:0;background:none;width:100%}
+.admonitionblock>table td.icon{text-align:center;width:80px}
+.admonitionblock>table td.icon img{max-width:none}
+.admonitionblock>table td.icon .title{font-weight:bold;font-family:"Open Sans","DejaVu Sans",sans-serif;text-transform:uppercase}
+.admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #dddddf;color:rgba(0,0,0,.6);word-wrap:anywhere}
+.admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content{border:1px solid #e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;border-radius:4px}
+.sidebarblock{border:1px solid #dbdbd6;margin-bottom:1.25em;padding:1.25em;background:#f3f3f2;border-radius:4px}
+.sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
+.exampleblock>.content>:first-child,.sidebarblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child,.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.literalblock pre,.listingblock>.content>pre{border-radius:4px;overflow-x:auto;padding:1em;font-size:.8125em}
+@media screen and (min-width:768px){.literalblock pre,.listingblock>.content>pre{font-size:.90625em}}
+@media screen and (min-width:1280px){.literalblock pre,.listingblock>.content>pre{font-size:1em}}
+.literalblock pre,.listingblock>.content>pre:not(.highlight),.listingblock>.content>pre[class=highlight],.listingblock>.content>pre[class^="highlight "]{background:#f7f7f8}
+.literalblock.output pre{color:#f7f7f8;background:rgba(0,0,0,.9)}
+.listingblock>.content{position:relative}
+.listingblock code[data-lang]::before{display:none;content:attr(data-lang);position:absolute;font-size:.75em;top:.425rem;right:.5rem;line-height:1;text-transform:uppercase;color:inherit;opacity:.5}
+.listingblock:hover code[data-lang]::before{display:block}
+.listingblock.terminal pre .command::before{content:attr(data-prompt);padding-right:.5em;color:inherit;opacity:.5}
+.listingblock.terminal pre .command:not([data-prompt])::before{content:"$"}
+.listingblock pre.highlightjs{padding:0}
+.listingblock pre.highlightjs>code{padding:1em;border-radius:4px}
+.listingblock pre.prettyprint{border-width:0}
+.prettyprint{background:#f7f7f8}
+pre.prettyprint .linenums{line-height:1.45;margin-left:2em}
+pre.prettyprint li{background:none;list-style-type:inherit;padding-left:0}
+pre.prettyprint li code[data-lang]::before{opacity:1}
+pre.prettyprint li:not(:first-child) code[data-lang]::before{display:none}
+table.linenotable{border-collapse:separate;border:0;margin-bottom:0;background:none}
+table.linenotable td[class]{color:inherit;vertical-align:top;padding:0;line-height:inherit;white-space:normal}
+table.linenotable td.code{padding-left:.75em}
+table.linenotable td.linenos,pre.pygments .linenos{border-right:1px solid;opacity:.35;padding-right:.5em;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
+pre.pygments span.linenos{display:inline-block;margin-right:.75em}
+.quoteblock{margin:0 1em 1.25em 1.5em;display:table}
+.quoteblock:not(.excerpt)>.title{margin-left:-1.5em;margin-bottom:.75em}
+.quoteblock blockquote,.quoteblock p{color:rgba(0,0,0,.85);font-size:1.15rem;line-height:1.75;word-spacing:.1em;letter-spacing:0;font-style:italic;text-align:justify}
+.quoteblock blockquote{margin:0;padding:0;border:0}
+.quoteblock blockquote::before{content:"\201c";float:left;font-size:2.75em;font-weight:bold;line-height:.6em;margin-left:-.6em;color:#7a2518;text-shadow:0 1px 2px rgba(0,0,0,.1)}
+.quoteblock blockquote>.paragraph:last-child p{margin-bottom:0}
+.quoteblock .attribution{margin-top:.75em;margin-right:.5ex;text-align:right}
+.verseblock{margin:0 1em 1.25em}
+.verseblock pre{font-family:"Open Sans","DejaVu Sans",sans-serif;font-size:1.15rem;color:rgba(0,0,0,.85);font-weight:300;text-rendering:optimizeLegibility}
+.verseblock pre strong{font-weight:400}
+.verseblock .attribution{margin-top:1.25rem;margin-left:.5ex}
+.quoteblock .attribution,.verseblock .attribution{font-size:.9375em;line-height:1.45;font-style:italic}
+.quoteblock .attribution br,.verseblock .attribution br{display:none}
+.quoteblock .attribution cite,.verseblock .attribution cite{display:block;letter-spacing:-.025em;color:rgba(0,0,0,.6)}
+.quoteblock.abstract blockquote::before,.quoteblock.excerpt blockquote::before,.quoteblock .quoteblock blockquote::before{display:none}
+.quoteblock.abstract blockquote,.quoteblock.abstract p,.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{line-height:1.6;word-spacing:0}
+.quoteblock.abstract{margin:0 1em 1.25em;display:block}
+.quoteblock.abstract>.title{margin:0 0 .375em;font-size:1.15em;text-align:center}
+.quoteblock.excerpt>blockquote,.quoteblock .quoteblock{padding:0 0 .25em 1em;border-left:.25em solid #dddddf}
+.quoteblock.excerpt,.quoteblock .quoteblock{margin-left:0}
+.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{color:inherit;font-size:1.0625rem}
+.quoteblock.excerpt .attribution,.quoteblock .quoteblock .attribution{color:inherit;font-size:.85rem;text-align:left;margin-right:0}
+p.tableblock:last-child{margin-bottom:0}
+td.tableblock>.content{margin-bottom:1.25em;word-wrap:anywhere}
+td.tableblock>.content>:last-child{margin-bottom:-1.25em}
+table.tableblock,th.tableblock,td.tableblock{border:0 solid #dedede}
+table.grid-all>*>tr>*{border-width:1px}
+table.grid-cols>*>tr>*{border-width:0 1px}
+table.grid-rows>*>tr>*{border-width:1px 0}
+table.frame-all{border-width:1px}
+table.frame-ends{border-width:1px 0}
+table.frame-sides{border-width:0 1px}
+table.frame-none>colgroup+*>:first-child>*,table.frame-sides>colgroup+*>:first-child>*{border-top-width:0}
+table.frame-none>:last-child>:last-child>*,table.frame-sides>:last-child>:last-child>*{border-bottom-width:0}
+table.frame-none>*>tr>:first-child,table.frame-ends>*>tr>:first-child{border-left-width:0}
+table.frame-none>*>tr>:last-child,table.frame-ends>*>tr>:last-child{border-right-width:0}
+table.stripes-all>*>tr,table.stripes-odd>*>tr:nth-of-type(odd),table.stripes-even>*>tr:nth-of-type(even),table.stripes-hover>*>tr:hover{background:#f8f8f7}
+th.halign-left,td.halign-left{text-align:left}
+th.halign-right,td.halign-right{text-align:right}
+th.halign-center,td.halign-center{text-align:center}
+th.valign-top,td.valign-top{vertical-align:top}
+th.valign-bottom,td.valign-bottom{vertical-align:bottom}
+th.valign-middle,td.valign-middle{vertical-align:middle}
+table thead th,table tfoot th{font-weight:bold}
+tbody tr th{background:#f7f8f7}
+tbody tr th,tbody tr th p,tfoot tr th,tfoot tr th p{color:rgba(0,0,0,.8);font-weight:bold}
+p.tableblock>code:only-child{background:none;padding:0}
+p.tableblock{font-size:1em}
+ol{margin-left:1.75em}
+ul li ol{margin-left:1.5em}
+dl dd{margin-left:1.125em}
+dl dd:last-child,dl dd:last-child>:last-child{margin-bottom:0}
+li p,ul dd,ol dd,.olist .olist,.ulist .ulist,.ulist .olist,.olist .ulist{margin-bottom:.625em}
+ul.checklist,ul.none,ol.none,ul.no-bullet,ol.no-bullet,ol.unnumbered,ul.unstyled,ol.unstyled{list-style-type:none}
+ul.no-bullet,ol.no-bullet,ol.unnumbered{margin-left:.625em}
+ul.unstyled,ol.unstyled{margin-left:0}
+li>p:empty:only-child::before{content:"";display:inline-block}
+ul.checklist>li>p:first-child{margin-left:-1em}
+ul.checklist>li>p:first-child>.fa-square-o:first-child,ul.checklist>li>p:first-child>.fa-check-square-o:first-child{width:1.25em;font-size:.8em;position:relative;bottom:.125em}
+ul.checklist>li>p:first-child>input[type=checkbox]:first-child{margin-right:.25em}
+ul.inline{display:flex;flex-flow:row wrap;list-style:none;margin:0 0 .625em -1.25em}
+ul.inline>li{margin-left:1.25em}
+.unstyled dl dt{font-weight:400;font-style:normal}
+ol.arabic{list-style-type:decimal}
+ol.decimal{list-style-type:decimal-leading-zero}
+ol.loweralpha{list-style-type:lower-alpha}
+ol.upperalpha{list-style-type:upper-alpha}
+ol.lowerroman{list-style-type:lower-roman}
+ol.upperroman{list-style-type:upper-roman}
+ol.lowergreek{list-style-type:lower-greek}
+.hdlist>table,.colist>table{border:0;background:none}
+.hdlist>table>tbody>tr,.colist>table>tbody>tr{background:none}
+td.hdlist1,td.hdlist2{vertical-align:top;padding:0 .625em}
+td.hdlist1{font-weight:bold;padding-bottom:1.25em}
+td.hdlist2{word-wrap:anywhere}
+.literalblock+.colist,.listingblock+.colist{margin-top:-.5em}
+.colist td:not([class]):first-child{padding:.4em .75em 0;line-height:1;vertical-align:top}
+.colist td:not([class]):first-child img{max-width:none}
+.colist td:not([class]):last-child{padding:.25em 0}
+.thumb,.th{line-height:0;display:inline-block;border:4px solid #fff;box-shadow:0 0 0 1px #ddd}
+.imageblock.left{margin:.25em .625em 1.25em 0}
+.imageblock.right{margin:.25em 0 1.25em .625em}
+.imageblock>.title{margin-bottom:0}
+.imageblock.thumb,.imageblock.th{border-width:6px}
+.imageblock.thumb>.title,.imageblock.th>.title{padding:0 .125em}
+.image.left,.image.right{margin-top:.25em;margin-bottom:.25em;display:inline-block;line-height:0}
+.image.left{margin-right:.625em}
+.image.right{margin-left:.625em}
+a.image{text-decoration:none;display:inline-block}
+a.image object{pointer-events:none}
+sup.footnote,sup.footnoteref{font-size:.875em;position:static;vertical-align:super}
+sup.footnote a,sup.footnoteref a{text-decoration:none}
+sup.footnote a:active,sup.footnoteref a:active{text-decoration:underline}
+#footnotes{padding-top:.75em;padding-bottom:.75em;margin-bottom:.625em}
+#footnotes hr{width:20%;min-width:6.25em;margin:-.25em 0 .75em;border-width:1px 0 0}
+#footnotes .footnote{padding:0 .375em 0 .225em;line-height:1.3334;font-size:.875em;margin-left:1.2em;margin-bottom:.2em}
+#footnotes .footnote a:first-of-type{font-weight:bold;text-decoration:none;margin-left:-1.05em}
+#footnotes .footnote:last-of-type{margin-bottom:0}
+#content #footnotes{margin-top:-.625em;margin-bottom:0;padding:.75em 0}
+div.unbreakable{page-break-inside:avoid}
+.big{font-size:larger}
+.small{font-size:smaller}
+.underline{text-decoration:underline}
+.overline{text-decoration:overline}
+.line-through{text-decoration:line-through}
+.aqua{color:#00bfbf}
+.aqua-background{background:#00fafa}
+.black{color:#000}
+.black-background{background:#000}
+.blue{color:#0000bf}
+.blue-background{background:#0000fa}
+.fuchsia{color:#bf00bf}
+.fuchsia-background{background:#fa00fa}
+.gray{color:#606060}
+.gray-background{background:#7d7d7d}
+.green{color:#006000}
+.green-background{background:#007d00}
+.lime{color:#00bf00}
+.lime-background{background:#00fa00}
+.maroon{color:#600000}
+.maroon-background{background:#7d0000}
+.navy{color:#000060}
+.navy-background{background:#00007d}
+.olive{color:#606000}
+.olive-background{background:#7d7d00}
+.purple{color:#600060}
+.purple-background{background:#7d007d}
+.red{color:#bf0000}
+.red-background{background:#fa0000}
+.silver{color:#909090}
+.silver-background{background:#bcbcbc}
+.teal{color:#006060}
+.teal-background{background:#007d7d}
+.white{color:#bfbfbf}
+.white-background{background:#fafafa}
+.yellow{color:#bfbf00}
+.yellow-background{background:#fafa00}
+span.icon>.fa{cursor:default}
+a span.icon>.fa{cursor:inherit}
+.admonitionblock td.icon [class^="fa icon-"]{font-size:2.5em;text-shadow:1px 1px 2px rgba(0,0,0,.5);cursor:default}
+.admonitionblock td.icon .icon-note::before{content:"\f05a";color:#19407c}
+.admonitionblock td.icon .icon-tip::before{content:"\f0eb";text-shadow:1px 1px 2px rgba(155,155,0,.8);color:#111}
+.admonitionblock td.icon .icon-warning::before{content:"\f071";color:#bf6900}
+.admonitionblock td.icon .icon-caution::before{content:"\f06d";color:#bf3400}
+.admonitionblock td.icon .icon-important::before{content:"\f06a";color:#bf0000}
+.conum[data-value]{display:inline-block;color:#fff!important;background:rgba(0,0,0,.8);border-radius:50%;text-align:center;font-size:.75em;width:1.67em;height:1.67em;line-height:1.67em;font-family:"Open Sans","DejaVu Sans",sans-serif;font-style:normal;font-weight:bold}
+.conum[data-value] *{color:#fff!important}
+.conum[data-value]+b{display:none}
+.conum[data-value]::after{content:attr(data-value)}
+pre .conum[data-value]{position:relative;top:-.125em}
+b.conum *{color:inherit!important}
+.conum:not([data-value]):empty{display:none}
+dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
+h1,h2,p,td.content,span.alt,summary{letter-spacing:-.01em}
+p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
+p,blockquote,dt,td.content,td.hdlist1,span.alt,summary{font-size:1.0625rem}
+p{margin-bottom:1.25rem}
+.sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
+.exampleblock>.content{background:#fffef7;border-color:#e0e0dc;box-shadow:0 1px 4px #e0e0dc}
+.print-only{display:none!important}
+@page{margin:1.25cm .75cm}
+@media print{*{box-shadow:none!important;text-shadow:none!important}
+html{font-size:80%}
+a{color:inherit!important;text-decoration:underline!important}
+a.bare,a[href^="#"],a[href^="mailto:"]{text-decoration:none!important}
+a[href^="http:"]:not(.bare)::after,a[href^="https:"]:not(.bare)::after{content:"(" attr(href) ")";display:inline-block;font-size:.875em;padding-left:.25em}
+abbr[title]{border-bottom:1px dotted}
+abbr[title]::after{content:" (" attr(title) ")"}
+pre,blockquote,tr,img,object,svg{page-break-inside:avoid}
+thead{display:table-header-group}
+svg{max-width:100%}
+p,blockquote,dt,td.content{font-size:1em;orphans:3;widows:3}
+h2,h3,#toctitle,.sidebarblock>.content>.title{page-break-after:avoid}
+#header,#content,#footnotes,#footer{max-width:none}
+#toc,.sidebarblock,.exampleblock>.content{background:none!important}
+#toc{border-bottom:1px solid #dddddf!important;padding-bottom:0!important}
+body.book #header{text-align:center}
+body.book #header>h1:first-child{border:0!important;margin:2.5em 0 1em}
+body.book #header .details{border:0!important;display:block;padding:0!important}
+body.book #header .details span:first-child{margin-left:0!important}
+body.book #header .details br{display:block}
+body.book #header .details br+span::before{content:none!important}
+body.book #toc{border:0!important;text-align:left!important;padding:0!important;margin:0!important}
+body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-break-before:always}
+.listingblock code[data-lang]::before{display:block}
+#footer{padding:0 .9375em}
+.hide-on-print{display:none!important}
+.print-only{display:block!important}
+.hide-for-print{display:none!important}
+.show-for-print{display:inherit!important}}
+@media amzn-kf8,print{#header>h1:first-child{margin-top:1.25rem}
+.sect1{padding:0!important}
+.sect1+.sect1{border:0}
+#footer{background:none}
+#footer-text{color:rgba(0,0,0,.6);font-size:.9em}}
+@media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
+</style>
+</head>
+<body class="book toc2 toc-left">
+<div id="header">
+<h1>Digital Baseband-Modem</h1>
+<div class="details">
+<span id="revnumber">version v1.0</span>
+</div>
+<div id="toc" class="toc2">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_dual_mode_baseband_modem">1. Dual-Mode Baseband-Modem</a>
+<ul class="sectlevel2">
+<li><a href="#_architecture_overview">1.1. Architecture Overview</a></li>
+<li><a href="#_baseband_modem_frontend">1.2. Baseband-Modem Frontend</a></li>
+<li><a href="#_commands_and_mmio_registers">1.3. Commands and MMIO Registers</a></li>
+<li><a href="#_list_of_commands">1.4. List of Commands</a></li>
+<li><a href="#_configuring_modem_luts">1.5. Configuring Modem LUTs</a></li>
+<li><a href="#_configuring_the_fir_filter_coefficients">1.6. Configuring the FIR filter coefficients</a></li>
+<li><a href="#_interrupts">1.7. Interrupts</a></li>
+<li><a href="#_ieee_802_15_4_lr_wpan_baseband">1.8. IEEE 802.15.4 LR-WPAN Baseband</a></li>
+<li><a href="#_bluetooth_low_energy_ble_baseband">1.9. Bluetooth Low Energy (BLE) Baseband</a>
+<ul class="sectlevel3">
+<li><a href="#_whitening">1.9.1. Whitening</a></li>
+</ul>
+</li>
+<li><a href="#_unified_fsk_modem">1.10. Unified FSK Modem</a>
+<ul class="sectlevel3">
+<li><a href="#_tx_chain">1.10.1. TX Chain</a></li>
+<li><a href="#_rx_chain">1.10.2. RX Chain</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#_example_radio_front_end_rfe">2. Example Radio Front-End (RFE)</a>
+<ul class="sectlevel2">
+<li><a href="#_specification">2.1. Specification</a></li>
+<li><a href="#_example_on_chip_rfe_architecture">2.2. Example On-Chip RFE Architecture</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_dual_mode_baseband_modem"><a class="link" href="#_dual_mode_baseband_modem">1. Dual-Mode Baseband-Modem</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Dual-Mode Baseband-Modem (BM) is responsible for handling the transmission and reception of both Bluetooth LE and IEEE 802.15.4 packets. For Bluetooth Low Energy, the BM handles Bluetooth Low Energy 1M Uncoded Link Layer Packets. For IEEE 802.15.4, the BM handles packets transmitted according to the PHY standard for the O-QPSK modulation in the 2.4 GHz band. Additionally the BM exposes an interface for the CPU to read/write various information (e.g. tuning bits) to the analog RF.</p>
+</div>
+<div class="paragraph">
+<p>There are two primary sub-components in the Baseband-Modem, the Baseband, and the Modem. The baseband is responsible for the bit-stream processing of incoming and outgoing packets. The modem is responsible for modulation on the TX side, and digital image rejection and demodulation on the RX side.</p>
+</div>
+<div class="sect2">
+<h3 id="_architecture_overview"><a class="link" href="#_architecture_overview">1.1. Architecture Overview</a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="./images/rx_chain_diagram.png" alt="rx chain diagram">
+</div>
+<div class="title">Figure 1. Receive chain system block diagram.</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/tx_chain_diagram.png" alt="tx chain diagram">
+</div>
+<div class="title">Figure 2. Transmit chain system block diagram.</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_baseband_modem_frontend"><a class="link" href="#_baseband_modem_frontend">1.2. Baseband-Modem Frontend</a></h3>
+
+</div>
+<div class="sect2">
+<h3 id="_commands_and_mmio_registers"><a class="link" href="#_commands_and_mmio_registers">1.3. Commands and MMIO Registers</a></h3>
+<div class="paragraph">
+<p>The baseband-modem (BM) block contains a set of memory mapped registers used for passing commands to the BM, tuning analog RF components, and making BM status visible to the CPU. The address map is shown below. Note that the addresses are relative to the BM’s base attachment address. For example, if the BM is attached at 0x8000, then the address of 0x04 corresponds to 0x8004.</p>
+</div>
+<table class="tableblock frame-all grid-all stripes-even stretch">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 50.0002%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-center valign-top">ADDR</th>
+<th class="tableblock halign-center valign-top">DATA</th>
+<th class="tableblock halign-center valign-top">Size (bits)</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x00</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Instruction</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">32</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Instruction received from processor. Contains 4 bits of primary instruction, 4 bits of secondary instruction, then 24 bits of data.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x04</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Additional Data</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">32</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Additional data to write. Set data before writing instructions when applicable.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x08</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Status 0</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">32</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[2:0] Assembler State<br>
+[5:3] Disassembler State<br>
+[7:6] TX State<br>
+[10:8] RX Controller State<br>
+[12:11] TX Controller State<br>
+[15:13] Controller State<br>
+[23:16] ADC I data<br>
+[31:24] ADC Q data</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x0C</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Status 1</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">32</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[5:0] Modulation LUT index<br>
+[10:6] I AGC LUT index<br>
+[15:11] I DCOC LUT index<br>
+[20:16] Q AGC LUT index<br>
+[25:21] Q DCOC LUT index</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x10</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Status 2</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">32</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[31:0] BLE CDR bit count</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x14</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Status 3</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">32</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[31:0] LRWPAN CDR bit count</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x18</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Status 4</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">32</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[31:0] LO/32 counter</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x1C</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">General trim 0</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">General trim bits (N/C)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x1D</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">General trim 1</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[0] LO/32 input (external, not implemented)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x1E</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">General trim 2</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">General trim bits (N/C)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x1F</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">General trim 3</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">General trim bits (N/C)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x20</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">General trim 4</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">General trim bits (N/C)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x21</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">General trim 5</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">General trim bits (N/C)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x22</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">General trim 6</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">General trim bits (N/C)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x23</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">General trim 7</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Debug Enable (0 = debug enable)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x24</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">I VGA gain control</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">10</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Manual VGA value if not using I AGC</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x26</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">I VGA attenuation reset</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">reset the I AGC</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x27</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">I VGA attenuation useAGC</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">use I AGC (manual VGA value if not)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x28</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">I VGA attenuation sample window</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">I AGC sample window</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x29</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">I VGA attenuation ideal peak to peak</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">I AGC ideal peak to peak</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x2A</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">I VGA tolerance peak to peak</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">I AGC peak to peak tolerance</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x2B</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">I BPF CHP 0 &amp; 1</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">I bandpass filter tuning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x2C</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">I BPF CHP 2 &amp; 3</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">I bandpass filter tuning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x2D</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">I BPF CHP 4 &amp; 5</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">I bandpass filter tuning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x2E</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">I BPF CLP 0 &amp; 1</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">I bandpass filter tuning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x2F</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">I BPF CLP 2</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">I bandpass filter tuning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x30</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Q VGA gain control</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">10</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Manual VGA value if not using Q AGC</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x32</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Q VGA attenuation reset</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">reset the Q AGC</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x33</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Q VGA attenuation useAGC</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">use Q AGC (manual VGA value if not)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x34</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Q VGA attenuation sample window</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Q AGC sample window</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x35</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Q VGA attenuation ideal peak to peak</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Q AGC ideal peak to peak</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x36</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Q VGA tolerance peak to peak</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Q AGC peak to peak tolerance</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x37</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Q BPF CHP 0 &amp; 1</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Q bandpass filter tuning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x38</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Q BPF CHP 2 &amp; 3</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Q bandpass filter tuning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x39</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Q BPF CHP 4 &amp; 5</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Q bandpass filter tuning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x3A</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Q BPF CLP 0 &amp; 1</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Q bandpass filter tuning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x3B</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Q BPF CLP 2</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Q bandpass filter tuning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x3C</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">I DCO use</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">toggle using I DCO</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x3D</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">I DCO reset</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">reset the I DCO</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x3E</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">I DCO gain</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">set gain for I DCO (unsigned FixedPoint w/ 2 bit binary point)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x3F</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Q DCO use</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">toggle using Q DCO</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x40</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Q DCO reset</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">reset the Q DCO</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x41</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Q DCO gain</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">set gain for Q DCO (unsigned FixedPoint w/ 2 bit binary point)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x42</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">DCOC tuning 1</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">6</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Manual I current DAC for stage 2 VGA value if not using I DCO</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x43</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">DCOC tuning 2</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">6</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Manual Q current DAC for stage 2 VGA value if not using Q DCO</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x46</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">MUX debug in</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">10</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Debug configuration, input</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x48</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">MUX debug out</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">10</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Debug configuration, output</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x4A</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Enable RX I</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">5</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Manual enable RX I values {3&#8217;b0, mix, buf, vga_s1, vga_s2, bpf}</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x4B</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Enable RX Q</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">5</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Manual enable RX Q values {3&#8217;b0, mix, buf, vga_s1, vga_s2, bpf}</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x4C</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Enable VCO LO</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Manual enable VCO LO {6&#8217;b0, vco_lo, lna}</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x50</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">LUT command</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">32</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LUT set instruction [3:0] LUT ID [9:4] address (index) [31:10] value</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x54</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">RX error message</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">32</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Interrupt message, RX error message</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x58</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">RX finish message</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">32</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Interrupt message, RX finish message</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x5C</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">TX error message</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">32</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Interrupt message, TX error message</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x60</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">FIR command</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">32</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FIR filter reprogramming instruction, [3:0] FIR ID [9:4] coefficient (index) [31:10] value</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x64</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">I VGA attenuation gain increase</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">I AGC gain increase step size (by LUT index)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x65</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">I VGA attenuation gain decrease</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">I AGC gain decrease step size (by LUT index)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x66</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Q VGA attenuation gain increase</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Q AGC gain increase step size (by LUT index)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x67</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Q VGA attenuation gain decrease</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Q AGC gain decrease step size (by LUT index)</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>In order to pass commands to the BM, two 32-bit registers at addresses 0x00 and 0x04 are utilized. The register at 0x04 contains the additional data field for a given command while the register at 0x00 contains the instruction. Writing to the register at 0x00 is the trigger for the BM to execute a given command. Accordingly, <strong>the processor should always write to the additional data register prior to writing to the instruction register for a given command.</strong> The format for a BM instruction and a list of available instructions are detailed below.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 14.2857%;">
+<col style="width: 28.5714%;">
+<col style="width: 28.5714%;">
+<col style="width: 28.5715%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Bits</th>
+<th class="tableblock halign-left valign-top">31-8</th>
+<th class="tableblock halign-left valign-top">7-4</th>
+<th class="tableblock halign-left valign-top">3-0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Field</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Data</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Instruction 2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Instruction 1</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_list_of_commands"><a class="link" href="#_list_of_commands">1.4. List of Commands</a></h3>
+<div class="paragraph">
+<p><strong>Configure Command</strong></p>
+</div>
+<div class="paragraph">
+<p>Configure baseband constants. The constant is selected using the instruction 2 field and set to the value specified in the additional data field. In the case that the secondary instruction is set to CONFIG_LUT, reference the LUT addresses provided in the explanations below/</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 14.2857%;">
+<col style="width: 28.5714%;">
+<col style="width: 28.5714%;">
+<col style="width: 28.5715%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Field</th>
+<th class="tableblock halign-left valign-top">Data</th>
+<th class="tableblock halign-left valign-top">Instruction 2</th>
+<th class="tableblock halign-left valign-top">Instruction 1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Value</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">X unless CONFIG_LUT, then LUT address</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">See table</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Field</th>
+<th class="tableblock halign-left valign-top">Additional Data</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Value</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Value for the constant to be set to</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Instruction 2</th>
+<th class="tableblock halign-left valign-top">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CONFIG_RADIO_MODE</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CONFIG_CRC_SEED</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CONFIG_ACCESS_ADDRESS</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CONFIG_SHR</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CONFIG_BLE_CHANNEL_INDEX</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x5</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CONFIG_LRWPAN_CHANNEL_INDEX</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>Configuration instruction descriptions</strong></p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">(0x0) CONFIG_RADIO_MODE</dt>
+<dd>
+<p>Specify the following in the Additional Data register (0x04) prior to issuing the instruction
+0: Set the radio transceiver mode to Bluetooth Low Energy
+1: Set the radio transceiver mode to IEEE 802.15.4 LR-WPAN
+Valid in any radio mode.</p>
+</dd>
+<dt class="hdlist1">(0x1) CONFIG_CRC_SEED</dt>
+<dd>
+<p>Set the CRC (cyclic redundancy check) seed for the BLE and LR-WPAN CRC circuits to the value in the Additional Data register (0x04). This value changes for BLE and should be 0 for LR-WPAN</p>
+</dd>
+<dt class="hdlist1">(0x2) CONFIG_ACCESS_ADDRESS</dt>
+<dd>
+<p>Set the BLE Access Address for the BLE uncoded packet. This value must be provided by the CPU. More information may be found in the BLE Baseband section.
+NOTE: An access address of 0xFFFFFFF6 disables whitening of transmitted BLE packets</p>
+</dd>
+<dt class="hdlist1">(0x3) CONFIG_SHR</dt>
+<dd>
+<p>Set the LRWPAN SHR to match with for receiving a LRWPAN packet. This value must be provided by the CPU. According to 802.15.4 spec, it should be a fixed value of 0xA700 (only 2 bytes are matched due to lower hardware cost), but is programmable for flexibility.</p>
+</dd>
+<dt class="hdlist1">(0x4) CONFIG_BLE_CHANNEL_INDEX</dt>
+<dd>
+<p>Values for the channel index can range from 0 to 39, corresponding to BLE channel frequencies beginning at 2402 MHz until 2480 MHz. It is critical to note that the channel index from 0 to 39 is a direct mapping to channel frequencies - NOT the BLE channel numbering scheme that considers advertising channels separately.. For example, setting CONFIG_BLE_CHANNEL_INDEX to 0 will result in a transmission with center frequency at 2402 MHz. This corresponds to BLE channel 37. More information: <a href="https://www.rfwireless-world.com/Terminology/BLE-Advertising-channels-and-Data-channels-list.html" class="bare">https://www.rfwireless-world.com/Terminology/BLE-Advertising-channels-and-Data-channels-list.html</a></p>
+</dd>
+<dt class="hdlist1">(0x5) CONFIG_LRWPAN_CHANNEL_INDEX</dt>
+<dd>
+<p>Values for the channel index can range from 0 to 15, corresponding to LR-WPAN channel frequencies beginning at 2405 MHz until 2480 MHz.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p><strong>Send Command</strong></p>
+</div>
+<div class="paragraph">
+<p>Transmit a specified number of PDU header and data bytes. Bytes are retrieved by the BM by loading them from the specified address.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Field</th>
+<th class="tableblock halign-left valign-top">Data</th>
+<th class="tableblock halign-left valign-top">Instruction 2</th>
+<th class="tableblock halign-left valign-top">Instruction 1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Value</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number of bytes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">X</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Field</th>
+<th class="tableblock halign-left valign-top">Additional Data</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Value</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Load address</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>Receive Enter Command</strong></p>
+</div>
+<div class="paragraph">
+<p>Place the device into receive mode. If a message is picked up, it will be stored starting at the specified address address.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Field</th>
+<th class="tableblock halign-left valign-top">Data</th>
+<th class="tableblock halign-left valign-top">Instruction 2</th>
+<th class="tableblock halign-left valign-top">Instruction 1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Value</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">X</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">X</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Field</th>
+<th class="tableblock halign-left valign-top">Additional Data</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Value</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Storage address</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>Receive Exit Command</strong></p>
+</div>
+<div class="paragraph">
+<p>Exit the device from receive mode. This command will succeed as long as the device has not yet matched an instruction preamble.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Field</th>
+<th class="tableblock halign-left valign-top">Data</th>
+<th class="tableblock halign-left valign-top">Instruction 2</th>
+<th class="tableblock halign-left valign-top">Instruction 1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Value</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">X</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">X</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Field</th>
+<th class="tableblock halign-left valign-top">Additional Data</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Value</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">X</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>Debug Command</strong></p>
+</div>
+<div class="paragraph">
+<p>Turns on both the TX and RX paths according to the specified loopback mask before passing the specified number of PDU bytes in a loop. For simplicity the return data is stored at &lt;load address + total bytes&gt; rounded to the next byte aligned address. The loopback mask is used to determine at which point the data should be revered and sent back towards the CC.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Field</th>
+<th class="tableblock halign-left valign-top">Data</th>
+<th class="tableblock halign-left valign-top">Instruction 2</th>
+<th class="tableblock halign-left valign-top">Instruction 1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Value</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Total bytes to send</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Loopback mask</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">15</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Field</th>
+<th class="tableblock halign-left valign-top">Additional Data</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Value</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Load address and base for store address calculation</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Loopback Mask</th>
+<th class="tableblock halign-left valign-top">Loopback Point</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0b0001 (0x1)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Empty</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0b0010 (0x2)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">In the modem, loop the FSKTX output back in to the CDR in FSKRX</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0b0100 (0x4)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Empty</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0b1000 (0x8)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Empty</p></td>
+</tr>
+</tbody>
+</table>
+<div class="imageblock">
+<div class="content">
+<img src="./images/loopback_diagram.png" alt="loopback diagram">
+</div>
+<div class="title">Figure 3. Loopback diagram, note that the FSKRX module handles loopback logic and directs the output of MSKTX &amp; GFSK TX modules to respective CDR blocks</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_configuring_modem_luts"><a class="link" href="#_configuring_modem_luts">1.5. Configuring Modem LUTs</a></h3>
+<div class="paragraph">
+<p>The modem LUTs can be configured using the LUT command register in the MMIO map enumerated above (register offset 0x50).</p>
+</div>
+<div class="paragraph">
+<p>LUT IDs are defined as follows:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">0x0 - VCO_MOD</dt>
+<dd>
+<p>64-entry, 8-bit valued LUT that is sampled to produce frequency deviations from the center frequency. This LUT must be reloaded on each channel and mode change. 0 indicates the largest negative frequency deviation, 63 indicates the largest positive deviation, and 31 indicates no frequency deviation. Note that 0/63 should be +/-250kHz for BLE and +/-500kHz for LR-WPAN.</p>
+</dd>
+<dt class="hdlist1">0x1 - VCO_CT_BLE</dt>
+<dd>
+<p>40-entry LUT sampled with BLE channel index to produce coarse and medium tuning bits to drive the VCO to the center frequency of the BLE channel index selected. Does not apply when in LR-WPAN radio mode.</p>
+</dd>
+<dt class="hdlist1">0x2 - VCO_CT_LRWPAN</dt>
+<dd>
+<p>16-entry LUT that is sampled with the LR-WPAN channel index to produce the coarse and medium tuning bits to drive the VCO to the center frequency of the LR-WPAN channel index selected. Does not apply when in BLE radio mode.</p>
+</dd>
+<dt class="hdlist1">0x3 - AGC_I</dt>
+<dd>
+<p>64-entry LUT that is sampled to drive the VGA attenuation gain for the I channel VGA. Only the lower 32 entries are used.</p>
+</dd>
+<dt class="hdlist1">0x4 - AGC_Q</dt>
+<dd>
+<p>64-entry LUT that is sampled to drive the VGA attenuation gain for the Q channel VGA. Only the lower 32 entries are used.</p>
+</dd>
+<dt class="hdlist1">0x5 - DCO_I</dt>
+<dd>
+<p>64-entry LUT that is sampled to drive the current DAC for the I channel stage 2 VGA. Only the lower 32 entries are used.</p>
+</dd>
+<dt class="hdlist1">0x6 - DCO_Q</dt>
+<dd>
+<p>64-entry LUT that is sampled to drive the current DAC for the Q channel stage 2 VGA. Only the lower 32 entries are used.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_configuring_the_fir_filter_coefficients"><a class="link" href="#_configuring_the_fir_filter_coefficients">1.6. Configuring the FIR filter coefficients</a></h3>
+<div class="paragraph">
+<p>The FIR filter coefficients can be configured using the FIR command register in the MMIO map enumerated above (register offset 0x60).</p>
+</div>
+<div class="paragraph">
+<p>FIR IDs are defined as follows:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">0x0 - NONE</dt>
+<dd>
+<p>Reserved</p>
+</dd>
+<dt class="hdlist1">0x1 - TX_GAUSSIAN</dt>
+<dd>
+<p>24-entry, 8-bit FixedPoint (2-bit fractional component) filter for BLE GFSK. Only 16 coefficients are used. Note the filter was designed to run at 8MHz (length = 2*cycles/bit) but there’s a bug in the implementation. The short-term fix to get it working was to double the coefficients.</p>
+</dd>
+<dt class="hdlist1">0x2 - RX_HILBERT_I</dt>
+<dd>
+<p>32-entry, 16-bit FixedPoint (12-bit fractional component) filter for image rejection.</p>
+</dd>
+<dt class="hdlist1">0x3 - RX_HILBERT_Q</dt>
+<dd>
+<p>32-entry, 16-bit FixedPoint (12-bit fractional component) filter for image rejection. The output of the I and Q filters are summed to form the image rejected signal suitable for FSK demodulation.</p>
+</dd>
+<dt class="hdlist1">0x4 - RX_MATCH_SIN_F0</dt>
+<dd>
+<p>32-entry, 16-bit FixedPoint (12-bit fractional component) filter for matched filter for binary 0. Two templates (filters) are used to account for phase shift. Note BLE coefficients are loaded by default. LR-WPAN ones must be loaded separately.</p>
+</dd>
+<dt class="hdlist1">0x5 - RX_MATCH_COS_F0</dt>
+<dd>
+<p>32-entry, 16-bit FixedPoint (12-bit fractional component) filter for matched filter for binary 0. Two templates (filters) are used to account for phase shift. Note BLE coefficients are loaded by default. LR-WPAN ones must be loaded separately.</p>
+</dd>
+<dt class="hdlist1">0x6 - RX_MATCH_SIN_F1</dt>
+<dd>
+<p>32-entry, 16-bit FixedPoint (12-bit fractional component) filter for matched filter for binary 1. Two templates (filters) are used to account for phase shift. Note BLE coefficients are loaded by default. LR-WPAN ones must be loaded separately.</p>
+</dd>
+<dt class="hdlist1">0x7 - RX_MATCH_COS_F1</dt>
+<dd>
+<p>32-entry, 16-bit FixedPoint (12-bit fractional component) filter for matched filter for binary 1. Two templates (filters) are used to account for phase shift. Note BLE coefficients are loaded by default. LR-WPAN ones must be loaded separately.</p>
+</dd>
+<dt class="hdlist1">0x8 - RX_LPF</dt>
+<dd>
+<p>32-entry, 16-bit FixedPoint (12-bit fractional component) filter for bitrate filter of the matched filter output. Two filters with the same coefficients are used, one for 0s and another for 1s. Note BLE coefficients are loaded by default. LR-WPAN ones must be loaded separately.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_interrupts"><a class="link" href="#_interrupts">1.7. Interrupts</a></h3>
+<div class="paragraph">
+<p>The Baseband-Modem provides five interrupts as outputs from the Baseband Frontend. These interrupts provide the CPU with triggers for events from the transceiver module. The interrupts are described in the table below:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. Baseband-Modem interrupt table</caption>
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 66.6668%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Interrupt Index</th>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RX_ERROR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Triggers on recognition of an error while the BM is in RX state. The MMIO register 0x54 will be populated with an RX_ERROR_MESSAGE. Presently not implemented.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RX_START</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Triggers when the baseband disassembler/correlator enters the busy state. Denotes that a packet has been received and demodulated, but has not yet been disassembled.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RX_FINISH</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Triggers when the disassembler has completed processing an incoming message. Populates the MMIO register RX_FINISH_MESSAGE at 0x58 with the length of the message.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TX_ERROR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Triggers on recognition of an error while the BM is in TX state. The MMIO register 0x5C will be populated with an TX_ERROR_MESSAGE. Presently not implemented.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TX_FINISH</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Triggers when the modem has completed transmission of all bytes in the provided message. The DMA read response bytes must match the number of bytes specified in the Send Command for this interrupt to fire.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_ieee_802_15_4_lr_wpan_baseband"><a class="link" href="#_ieee_802_15_4_lr_wpan_baseband">1.8. IEEE 802.15.4 LR-WPAN Baseband</a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="./images/lrwpan_baseband.png" alt="lrwpan baseband">
+</div>
+<div class="title">Figure 4. LR-WPAN baseband and modulation/demodulation diagram</div>
+</div>
+<div class="paragraph">
+<p>The LR-WPAN baseband transmission chain involves DMA packet disassembly, LR-WPAN packet assembly, CRC generation, bit-to-symbol translation, and symbol-to-chip translation before the final chip stream is provided to the modem for modulation. The packet is assembled according to the IEEE 802.15.4 (LR-WPAN) PPDU schematic (shown below).</p>
+</div>
+<div class="paragraph">
+<p>It is important to note the rates at each stage of the baseband TX chain. The standard calls for a 250 kb/s bitrate corresponding to packet assembly/packet disassembly. Following bit-to-symbol translation, the symbol rate becomes 62.5 ksym/s (where 4 bits specifies 1 symbol). Following symbol-to-chip translation, the chip rate now matches the LR-WPAN nominal baseband frequency of 2 MHz frequency or 2 Mchip/s (where 1 symbol specifies 32 chips). The inverse applies for the RX chain.</p>
+</div>
+<div class="paragraph">
+<p>During packet assembly, a frame check sequence is calculated as a 16-bit ITU-T CRC.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/lrwpan_crc_diagram.png" alt="lrwpan crc diagram">
+</div>
+<div class="title">Figure 5. CRC calculation diagram</div>
+</div>
+<div class="paragraph">
+<p>The algorithm for the CRC begins by setting all remainder registers, r0&#8230;&#8203;r15, to zero. Next, we start from the LSB and shift the MHR and payload into the divider. The FCS is then the remainder register after the last bit of the data is shifted in. Lastly, the FCS is appended to the data field so that register r0 is transmitted first.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/lrwpan_ppdu_schematic.png" alt="lrwpan ppdu schematic">
+</div>
+<div class="title">Figure 6. IEEE 802.15.4 PPDU Schematic</div>
+</div>
+<div class="paragraph">
+<p>The frame check sequence (FCS) is appended to the end of the PPDU as the MAC footer (MFR) in the diagram above. If the result of CRC checking is false, the [flag] is set to high, before triggering a RX_ERROR message.</p>
+</div>
+<div class="paragraph">
+<div class="title">PSDU Schematic</div>
+<p>The preamble for 15.4 is a 32-bit sequence of all zeros. The SFD is loosely analogous to the Access-Address (AA) of the BLE Baseband in that they both uniquely identify the start of the packet for the protocol used.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_bluetooth_low_energy_ble_baseband"><a class="link" href="#_bluetooth_low_energy_ble_baseband">1.9. Bluetooth Low Energy (BLE) Baseband</a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="./images/ble_baseband.png" alt="ble baseband">
+</div>
+<div class="title">Figure 7. BLE baseband and modulation/demodulation diagram</div>
+</div>
+<div class="paragraph">
+<p>Below is the BLE Uncoded Packet format. All elements of the packet either are or depend on data that the CPU must set (which is taken care of by the SW implementation of the Link Layer). These values are communicated to the packet assembler and disassembler through the controller via the command system over MMIO.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/ble_ppdu_schematic.png" alt="ble ppdu schematic">
+</div>
+<div class="title">Figure 8. BLE PPDU Schematic</div>
+</div>
+<div class="paragraph">
+<p>The Preamble is an alternating series of 1s and 0s that depends on the LSB of the Access-Address (AA). The CPU need not provide any additional control signals for this part of the packet.</p>
+</div>
+<div class="paragraph">
+<p>The Access-Address is a special value set by the SW Link Layer that determines whether a packet is valid or not. This value must be provided by the CPU and depends on past communications or may be set to some default value.</p>
+</div>
+<div class="paragraph">
+<p>The PDU is the already encrypted content of the packet, the CPU must provide this in its entirety. Through the DMA controller, the packet assembler will retrieve this from main memory. The packet disassembler will deliver a PDU to the main memory once one is received.</p>
+</div>
+<div class="paragraph">
+<p>The CRC (cyclic redundancy check) is derived from the Link Layer state (which must be provided by the CPU via MMIO register).
+In the receive chain, if the calculated CRC does not match the CRC found in the PDU, the [flag] is set to high.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/ble_crc_diagram.png" alt="ble crc diagram">
+</div>
+<div class="title">Figure 9. BLE CRC functional schematic</div>
+</div>
+<div class="sect3">
+<h4 id="_whitening"><a class="link" href="#_whitening">1.9.1. Whitening</a></h4>
+<div class="paragraph">
+<p>In order to avoid long continuous sequences of 1s and 0s in the transmitted data, the entire packet goes through a process known as whitening.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/whitening_diagram.png" alt="whitening diagram">
+</div>
+<div class="title">Figure 10. Whitening diagram</div>
+</div>
+<div class="paragraph">
+<p>Outgoing data on the TX chain is whitened and incoming data is also “de-whitened”</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_unified_fsk_modem"><a class="link" href="#_unified_fsk_modem">1.10. Unified FSK Modem</a></h3>
+<div class="paragraph">
+<p>The modem sits between the digital baseband and the ADCs / DAC to analog RF. It is responsible for performing demodulation and modulation and clock and data recovery at a rate of 1Mbps for BLE or 2Mchip/s for LR-WPAN. Each cycle, the digital baseband either receives a new bit from the demodulator, or provides a new bit for transmission to the modulator.</p>
+</div>
+<div class="sect3">
+<h4 id="_tx_chain"><a class="link" href="#_tx_chain">1.10.1. TX Chain</a></h4>
+<div class="imageblock">
+<div class="content">
+<img src="./images/modem_tx_schematic.png" alt="modem tx schematic">
+</div>
+<div class="title">Figure 11. Modem TX chain schematic</div>
+</div>
+<div class="paragraph">
+<p>The digital baseband bit-stream process outputs individual bits into a FIFO that will be consumed by the modem for use in modulation. For BLE transmissions, the bitstream is modulated using Gaussian frequency shift keying (GFSK). The modulator modulates the outgoing bits using at a rate of 1Msym/s, with a modulation index of 0.5. For LR-WPAN transmissions, the chipstream directly drives the modulation LUT. The output of the modulation LUT is an 8-bit unsigned integer value that indicates the FSK modulation away from the maximum frequency at that channel tuning.</p>
+</div>
+<div class="paragraph">
+<p>The 6-bit FSK modulation output, in conjunction with a 6 bit channel select value, are used to address into the Modulation LUT to retrieve input values for the VCO LO based on the channel index and modulation frequency offset. These decoding LUTs provide 8-bit values for LO coarse tuning, LO FSK, and the PLL division.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_rx_chain"><a class="link" href="#_rx_chain">1.10.2. RX Chain</a></h4>
+<div class="imageblock">
+<div class="content">
+<img src="./images/modem_rx_schematic.png" alt="modem rx schematic">
+</div>
+<div class="title">Figure 12. Modem RX chain schematic</div>
+</div>
+<div class="paragraph">
+<p>After mixing, the analog I and Q signals go through ADCs to produce 8 bit output values. The ADCs are clocked on the negative edge of the digital system clock. On the falling system clock edge, the ADCs sample and latch the signals coming from analog RF. These sampled 8-bit values are then captured by rising-edge triggered flip-flops at the analog-digital boundary of the RX chain.</p>
+</div>
+<div class="sect4">
+<h5 id="_image_rejection"><a class="link" href="#_image_rejection">Image Rejection</a></h5>
+<div class="paragraph">
+<p>After mixing with the LO and being sampled by the I/Q ADCs, the Q signal for the signal (F_LO+F_IF) ends up +90° shifted from I while the image (F_LO-F_IF) ends up -90° shifted from I. A Hilbert filter shifts positive frequencies by +90° and negative frequencies by -90°. By applying it to the I signal and adding to the Q signal, this causes constructive interference for the desired signal and destructive interference for the image, heavily attenuating it. Note these filters are fully configurable (up to their maximum length) if needed.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_fsk_demodulation"><a class="link" href="#_fsk_demodulation">FSK Demodulation</a></h5>
+<div class="paragraph">
+<p>After image rejection, the matched filters (the optimal non-coherent demodulator!) and envelope detection serve to discriminate between positive and negative frequency deviations. A matched filter performs a convolution of the input signal with a “template” which is simply samples of the desired frequency up to the length of a bit/chip period. Due to phase shift, we must have sine and cosine templates and sum the two. Since the filters generate high frequency noise, we perform “envelope detection” after the matched filters to remove it and get a clean signal giving the magnitude of the match. Comparing the magnitude of each gives us the decision for the deviation.</p>
+</div>
+<div class="paragraph">
+<p>For an ADC clock of 32MHz, we need a 32-length filter for BLE and 16-length filter for LR-WPAN. For an IF of 2MHz, we need templates of 1.75MHz and 2.25MHz for BLE and 1.5MHz and 2.5MHz for LR-WPAN.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_clock_and_data_recovery_cdr"><a class="link" href="#_clock_and_data_recovery_cdr">Clock and Data Recovery (CDR)</a></h5>
+<div class="paragraph">
+<p>After FSK demodulation, we have an oversampled bitstream which must downsample to the appropriate bitrate. The goal of the CDR is to align the sampling window with the phase of the incoming bitstream.</p>
+</div>
+<div class="paragraph">
+<p>Our design has 3 integrators - early, present, late - which each look at a window (of length equal to the bit period) of the incoming bitstream but are offset from each other by 1 cycle. We then have a counter that decrements every cycle. When the counter hits 0, we return a sampled bit that is the value of the strongest integrator (determined by majority and number of 1s and 0s). We then reset the counter to a value that will cause the winning integrator in the next bit period to be closer to the present integrator (either by extending or shortening the amount of time to the next sample time).</p>
+</div>
+<div class="paragraph">
+<p>For LR-WPAN, the long length of the preamble and chip spreading make slow phase aligning CDRs a non-issue. For BLE, we only have the preamble of 8 symbols to align. For a 32MHz clock and BLE’s 1Mbps, we would be at most 16 cycles off in phase alignment. However, since our CDR always returns the integrator of greatest absolute value rather than the present one each time, it should confidently return the correct symbol despite a large phase shift and it still aligning to an incoming signal.</p>
+</div>
+<div class="paragraph">
+<p>This idea can easily be extended to more integrators to align to phase shifts more quickly or control the granularity of phase shifts, but we found that 3 integrators and a 1 cycle shift between them worked well in simulation. If our clock is particularly off, the CDR will fail to account for both the phase shift and clock inaccuracy which would necessitate the extension.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_packet_detection"><a class="link" href="#_packet_detection">Packet Detection</a></h5>
+<div class="paragraph">
+<p>For BLE, the preamble is intended to lock in the AGC and CDR while the following access address is what determines the start of the packet and the byte alignment. The BLE packet detector searches for the access address after which it can confidently send (whitened) bytes over to the baseband. The baseband asserts an end-of-packet signal when it’s done consuming the bytes of the packet.</p>
+</div>
+<div class="paragraph">
+<p>For LR-WPAN, the preamble again locks in the AGC and CDR while the SFD (0xA7) denotes the start of the packet. Since each 4-bit symbol (within each 8-bit byte) is sent out as a 32-chip sequence, we perform the chip sequence to symbol mapping based on Hamming distance before looking for the SFD. To minimize false matches while reducing hardware cost, we also match one byte of the preamble (searching for 0xA700) to determine the start of the packet. After that, the packet detector can again confidently send bytes to the baseband.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_automatic_gain_control_agc"><a class="link" href="#_automatic_gain_control_agc">Automatic Gain Control (AGC)</a></h5>
+<div class="paragraph">
+<p>To support high dynamic range and also keep our ADCs near saturation to maximize demodulation accuracy and SNR, we have an AGC for I and Q. It is a simple design, keeping track of the difference between the minimum and maximum values of the ADC for a given window (which should be long enough to see a sine wave minimum and maximum). If the value exceeds the desired value plus some tolerance, we increase the gain. If it’s below, we decrease the gain.</p>
+</div>
+<div class="paragraph">
+<p>For stable output, keep the tolerance larger than the gain resolution. For fast locking to incoming signals (where the AGC will be at its maximum due to just seeing noise), have the decrement amount be larger than the increment amount.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_dc_offset_compensation_dco"><a class="link" href="#_dc_offset_compensation_dco">DC Offset Compensation (DCO)</a></h5>
+<div class="paragraph">
+<p>To remove the DC offset in the ADC output for I and Q, we have a DCO. It simply integrates the incoming signal (interpreted as a FixedPoint between -1 and ~1), applies a gain, and feeds that back into a LUT that will calibrate the VGA to remove the offset.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_example_radio_front_end_rfe"><a class="link" href="#_example_radio_front_end_rfe">2. Example Radio Front-End (RFE)</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_specification"><a class="link" href="#_specification">2.1. Specification</a></h3>
+<div class="paragraph">
+<p>The radio must be able to operate in the frequency range of 2.4G to 2.4835 GHz covering 70 1MHz RF channels. In this range, the receive chain should function over an input power range from -70dBm to -10dBm and achieve a BER of 0.1% (translates to an SNR of 12.5dB) in following in band test conditions when the input is at -67dBm, shown below.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 2. In-Band Interference, Nominal Temperature</caption>
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Interference Channel</th>
+<th class="tableblock halign-left valign-top">Ratio (dB)</th>
+<th class="tableblock halign-left valign-top">Input Signal (dBm)</th>
+<th class="tableblock halign-left valign-top">Interferer (dBm)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Co-channel</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">11</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-60 dBm</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-71 dBm</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adj. 1 MHz</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-60 dBm</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-60 dBm</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adj. 2 MHz</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-30</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-60 dBm</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-30 dBm</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adj. &gt;3 MHz</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-40</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-67 dBm</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-27 dBm</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Image</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-9</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-67 dBm</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-58 dBm</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Image +/- 1 MHz</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-20</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-67 dBm</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-47 dBm</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 3. Out-of-Band Interference</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Interference Channel</th>
+<th class="tableblock halign-left valign-top">Interferer (dBm)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">30 MHz - 2000 MHz</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-10 dBm</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2000 MHz - 2399 MHz</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-27 dBm</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2484 MHz - 3000 MHz</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-27 dBm</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3000 MHz - 12.75 GHz</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-10 dBm</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_example_on_chip_rfe_architecture"><a class="link" href="#_example_on_chip_rfe_architecture">2.2. Example On-Chip RFE Architecture</a></h3>
+<div class="paragraph">
+<p>The example radio front-end architecture below uses a low-IF receiver architecture and a direct modulation transmitter architecture. This architecture is the on-chip RFE that was used during the development of this baseband-modem processor, so most of the analog tuning and configuration registers are specific to this architecture.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/example_rfe_diagram.png" alt="example rfe diagram">
+</div>
+<div class="title">Figure 13. Example on-chip RFE architecture</div>
+</div>
+<div class="paragraph">
+<p>The baseband-modem&#8217;s receive chain supports automatic gain control based on tuning the the VGA and VG-TIA gain stages. And its DC offset correction (DCOC) is based on tuning the current DAC at the input of the final VGA stage.</p>
+</div>
+<div class="paragraph">
+<p>The baseband-modem&#8217;s transmit modulation implementation is specific to this direct modulation architecture, where the coarse/med/mod bits drive the capacitively tuned VCO.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Version v1.0<br>
+Last updated 2024-01-10 08:36:48 UTC
+</div>
+</div>
+</body>
+</html>

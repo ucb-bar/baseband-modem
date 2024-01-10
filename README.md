@@ -1,6 +1,6 @@
 # 2.4 GHz BLE & IEEE 802.15.4 Baseband-Modem
 
-This is a baseband-modem processor designed to be used as a peripheral on an SoC generated with Chipyard. It supports both 2.4 GHz Bluetooth Low Energy and IEEE 802.15.4 specifications, and requirues a radio front-end that can either be on-chip or off-chip. 
+This is a baseband-modem processor designed to be used as a peripheral on an SoC generated with Chipyard. It supports both 2.4 GHz Bluetooth Low Energy and IEEE 802.15.4 specifications, and requires an analog radio front-end that can either be on-chip or off-chip. 
 
 For Bluetooth Low Energy, this processor handles Bluetooth Low Energy 1M Uncoded Link Layer Packets. And for the IEEE 802.15.4 2.4 GHz PHY, this processor prepares, transmits, receives, and unpacks packets. Additionally the processor exposes an interface for the CPU to read/write various information (e.g. tuning bits) to the analog radio front-end.
 

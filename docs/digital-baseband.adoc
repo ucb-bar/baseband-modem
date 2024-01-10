@@ -1,5 +1,5 @@
 = Digital Baseband-Modem
-:toc:
+:toc: left
 :toclevels: 3
 :imagesdir: ./images
 :outline-title: Table of Contents
